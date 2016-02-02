@@ -1,0 +1,22 @@
+[hekad]
+base_dir = "/usr/local/heka"
+
+[HaproxyDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/haproxy_decoder.lua"
+
+[LogstreamerInput]
+log_directory = "/var/log/syslog-ng/"
+file_match = 'syslog.log'
+
+[PayloadEncoder]
+append_newlines = false
+
+[LogOutput]
+message_matcher = "TRUE"
+encoder = "PayloadEncoder"
+
+
+
+
+
