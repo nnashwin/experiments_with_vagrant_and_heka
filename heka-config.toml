@@ -1,5 +1,5 @@
 [hekad]
-base_dir = "/usr/local/heka"
+base_dir = "/home/heka/"
 
 [HaproxyDecoder]
 type = "SandboxDecoder"

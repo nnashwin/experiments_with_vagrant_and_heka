@@ -10,7 +10,7 @@ sudo apt-get install -y syslog-ng-core syslog-ng nodejs npm git haproxy
 
 sudo apt-get install build-essential
 
-
+sudo locale-gen UTF-8
 
 sudo apt-get install cmake
 
@@ -27,7 +27,6 @@ sudo mkdir /usr/go && sudo tar -zxf go1.4.2.linux-amd64.tar.gz -C /usr/go --stri
 echo 'export PATH=/usr/go/bin:$PATH' >> ~/.bash_profile
 
 wget https://github.com/mozilla-services/heka/releases/download/v0.10.0/heka-0_10_0-linux-amd64.tar.gz
-
 sudo mkdir /usr/heka && sudo tar -xzf heka-0_10_0-linux-amd64.tar.gz -C /usr/heka/ --strip-components 1
 
 echo 'export PATH=/usr/heka/bin:$PATH' >> ~/.bash_profile
@@ -36,8 +35,11 @@ sudo mkdir /usr/share/heka/
 
 sudo mkdir /var/log/syslog-ng
 
+sudo mkdir /home/heka
+
 #exit
 
+# config heka
 
 echo PATH $PATH
 
@@ -46,6 +48,9 @@ sudo mkdir /usr/heka/log/
 sudo cp /vagrant/heka-config.toml /etc/config.toml
 
 sudo cp /vagrant/haproxy_decoder.lua /usr/heka/share/heka/lua_decoders/haproxy_decoder.lua
+
+sudo chmod 755 /home
+sudo chmod 777 /home/heka
 
 sudo mv /etc/syslog-ng/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf.default
 
