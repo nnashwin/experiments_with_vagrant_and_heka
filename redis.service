@@ -1,0 +1,6 @@
+[Unit]
+Description=Redis
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/redis/src/redis-server

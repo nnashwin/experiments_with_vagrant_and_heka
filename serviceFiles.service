@@ -1,0 +1,23 @@
+# syslog-service
+[Unit]
+Description=syslog-ng
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/etc/init.d/syslog-ng start
+[Install]
+RequiredBy=heka.service
+# heka service
+
+[Unit]
+Description=Heka
+After=syslog-ng.service
+Requires=syslog-ng.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/heka/bin/hekad -config='/etc/config.toml'
+
+[Install]
+WantedBy=
+

@@ -1,0 +1,8 @@
+[Unit]
+Description=syslog-ng
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/etc/init.d/syslog-ng start
+[Install]
+RequiredBy=heka.service
