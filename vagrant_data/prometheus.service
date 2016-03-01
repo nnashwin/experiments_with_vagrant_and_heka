@@ -1,0 +1,9 @@
+[Unit]
+Description=prometheus
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/prometheus/prometheus -config.file=/usr/prometheus/prometheus.yml
+
+[Install]
+RequiredBy=grafana.service

@@ -1,0 +1,29 @@
+[hekad]
+base_dir = "/home/heka/"
+
+[MultiDecoder]
+type = "MultiDecoder"
+subs = ['RedisDecoder', 'HaproxyDecoder']
+cascade_strategy = "first-wins"
+log_sub_errors = true
+
+[HaproxyDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/haproxy_decoder.lua"
+
+[RedisDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/redis_decoder.lua"
+
+
+[PayloadEncoder]
+append_newlines = false
+
+[LogOutput]
+message_matcher = "TRUE"
+encoder = "PayloadEncoder"
+
+
+
+
+

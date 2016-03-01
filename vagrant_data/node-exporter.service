@@ -1,0 +1,8 @@
+[Unit]
+Description=node_exporter
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/node_exporter/node_exporter
+
+[Install]

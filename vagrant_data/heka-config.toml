@@ -1,0 +1,55 @@
+[hekad]
+base_dir = "/home/heka"
+
+[DiskStats]
+type = "FilePollingInput"
+ticker_interval = 10
+file_path = "/sys/block/sda/stat"
+decoder = "DiskStatsDecoder"
+
+[DiskStatsDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/linux_diskstats.lua"
+
+[DiskStatsFilter]
+type = "SandboxFilter"
+filename = "lua_filters/diskstats.lua"
+preserve_data = true
+message_matcher = "Type == 'stats.diskstats'"
+ticker_interval = 10
+
+[ProcStats]
+type = "FilePollingInput"
+ticker_interval = 1
+file_path = "/proc/stat"
+decoder = "ProcStatDecoder"
+
+[ProcStatDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/linux_procstat.lua"
+
+[ProcStatFilter]
+type = "SandboxFilter"
+filename = "lua_filters/procstat.lua"
+preserve_data = true
+message_matcher = "Type == 'stats.procstat'"
+[ProcStatFilter.config]
+    whitelist = "cpu$"
+    extras = false
+    percent_integer = true
+
+[MemStats]
+type = "FilePollingInput"
+ticker_interval = 1
+file_path = "/proc/meminfo"
+decoder = "MemStatsDecoder"
+
+[MemStatsDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/linux_memstats.lua"
+
+[PayloadEncoder]
+append_newlines = false
+
+[DashboardOutput]
+ticker_interval = 10

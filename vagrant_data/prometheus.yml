@@ -4,8 +4,8 @@ global:
   external_labels:
     monitor: 'codelab-monitor'
 scrape_configs:
-  - job_name: 'prometheus'
-    scrape_intervals: 5s
+  - job_name: 'heka'
+    scrape_interval: 5s
     scrape_timeout: 10s
     target_groups:
-    - targets: ['localhost:9090']
+    - targets: ['localhost:9100']

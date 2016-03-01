@@ -1,0 +1,10 @@
+[Unit]
+Description=Heka
+After=syslog-ng.service
+Requires=syslog-ng.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/heka/bin/hekad
+
+[Install]
