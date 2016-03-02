@@ -1,55 +1,30 @@
 [hekad]
-base_dir = "/home/heka"
+base_dir = "/home/heka/"
 
-[DiskStats]
-type = "FilePollingInput"
-ticker_interval = 10
-file_path = "/sys/block/sda/stat"
-decoder = "DiskStatsDecoder"
+[LogFileInput]
+type = "LogstreamerInput"
+log_directory = "/vagrant/log"
+file_match = 'test\.log'
+decoder = "MultiDecoder"
 
-[DiskStatsDecoder]
+[MultiDecoder]
+type = "MultiDecoder"
+subs = ['RedisDecoder', 'HaproxyDecoder']
+cascade_strategy = "first-wins"
+
+[HaproxyDecoder]
 type = "SandboxDecoder"
-filename = "lua_decoders/linux_diskstats.lua"
+filename = "lua_decoders/haproxy_decoder.lua"
 
-[DiskStatsFilter]
-type = "SandboxFilter"
-filename = "lua_filters/diskstats.lua"
-preserve_data = true
-message_matcher = "Type == 'stats.diskstats'"
-ticker_interval = 10
-
-[ProcStats]
-type = "FilePollingInput"
-ticker_interval = 1
-file_path = "/proc/stat"
-decoder = "ProcStatDecoder"
-
-[ProcStatDecoder]
+[RedisDecoder]
 type = "SandboxDecoder"
-filename = "lua_decoders/linux_procstat.lua"
+filename = "lua_decoders/redis_decoder.lua"
 
-[ProcStatFilter]
-type = "SandboxFilter"
-filename = "lua_filters/procstat.lua"
-preserve_data = true
-message_matcher = "Type == 'stats.procstat'"
-[ProcStatFilter.config]
-    whitelist = "cpu$"
-    extras = false
-    percent_integer = true
-
-[MemStats]
-type = "FilePollingInput"
-ticker_interval = 1
-file_path = "/proc/meminfo"
-decoder = "MemStatsDecoder"
-
-[MemStatsDecoder]
-type = "SandboxDecoder"
-filename = "lua_decoders/linux_memstats.lua"
 
 [PayloadEncoder]
 append_newlines = false
 
-[DashboardOutput]
-ticker_interval = 10
+[LogOutput]
+message_matcher = "TRUE"
+encoder = "PayloadEncoder"
+
