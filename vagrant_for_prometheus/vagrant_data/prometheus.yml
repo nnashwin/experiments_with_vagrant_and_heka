@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'codelab-monitor'
+scrape_configs:
+  - job_name: 'consul_sd'
+    consul_sd_configs:
+    - server: 'localhost:8500'
+      services: ['exporter']

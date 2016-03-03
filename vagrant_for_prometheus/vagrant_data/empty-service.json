@@ -1,0 +1,11 @@
+{
+    "Datacenter": "",
+    "Node": "exporter",
+    "Address": "127.0.0.1",
+    "Service": {
+        "ID": "DiskStats",
+        "Service": "exporter",
+        "Address": "127.0.0.1",
+        "Port": 5000
+    }
+}

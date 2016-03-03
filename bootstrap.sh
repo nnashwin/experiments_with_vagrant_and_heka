@@ -32,17 +32,11 @@ echo 'export GOROOT=$HOME/go' >> ~/.bash_profile
 
 echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.bash_profile
 
-# download dependencies needed for the heka_exporter
-go get github.com/prometheus/client_golang/prometheus
-go get github.com/stretchr/stew/objects
-
 # git clone exporter
 git clone https://github.com/docker-infra/heka_exporter.git $HOME/heka_exporter
 
 # go build the binary for the exporter
 go build .
-
-# download 
 
 # download and untar heka
 
@@ -79,8 +73,8 @@ sudo cp /vagrant_data/grafana_dashboards/* /usr/grafana/dashboard_json/
 
 # clone exporter repo into the file system
 
-sudo mkdir /usr/heka_exporter
-sudo git clone https://github.com/docker-infra/heka_exporter.git /usr/heka_exporter
+# sudo mkdir /usr/heka_exporter
+# sudo git clone https://github.com/docker-infra/heka_exporter.git /usr/heka_exporter
 
 
 echo 'export PATH=/usr/heka/bin:$PATH' >> ~/.bash_profile
@@ -111,7 +105,7 @@ sudo cp /usr/heka/share/heka/lua_filters/* /usr/share/heka/lua_filters/
 sudo cp /usr/heka/share/heka/lua_modules/* /usr/share/heka/lua_modules/
 
 # config heka dashboard to send to prometheus
-sudo mkdir /usr/share/heka/dasher
+# sudo mkdir /usr/share/heka/dasher
 
 # create dir for and clone comp stats exporter
 sudo mkdir /usr/node_exporter
@@ -133,9 +127,9 @@ sudo cp /vagrant_data/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 # config systemd custom logging services
 sudo systemctl enable /vagrant_data/syslog-ng.service
 sudo systemctl enable /vagrant_data/heka.service
-sudo systemctl enable /vagrant_data/prometheus.service
 sudo systemctl enable /vagrant_data/node-exporter.service
 sudo systemctl enable /vagrant_data/grafana.service
+sudo systemctl enable /vagrant_data/prometheus.service
 
 
 #start systemctl services
