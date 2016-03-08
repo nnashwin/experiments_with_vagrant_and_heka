@@ -113,8 +113,6 @@ sudo git clone https://github.com/prometheus/node_exporter.git /usr/node_exporte
 cd /usr/node_exporter
 sudo make
 
-
-
 sudo chmod 755 /home
 sudo chmod 777 /home/heka
 sudo chmod 777 /home/heka

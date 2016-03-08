@@ -12,7 +12,9 @@ local log_date = l.Cg(dt.build_strftime_grammar("%d %b %H:%M:%S"), "log_date")
 local milliseconds = l.P"." * l.R("09")^1
 local symbol = l.Cg(l.S("#*-"), "symbol")
 local logMsg = l.Cg(l.P(1)^1, "message")
-local pattern = pid * sp * log_date * milliseconds * sp * symbol * sp * logMsg
+local result = l.Cg(log_date * milliseconds * sp * symbol * sp * logMsg, "result")
+local basePattern = pid * sp * log_date * milliseconds * sp * symbol * sp * logMsg
+local pattern = pid * sp * result
 
 local grammar = l.Ct(pattern)
 
@@ -30,6 +32,7 @@ function process_message()
     msg.Timestamp = m.log_date
     msg.Symbol = m.symbol
     msg.logMsg = m.message
+    msg.result = m.result
   else
     msg.Type = "Ignore"
   end
@@ -38,7 +41,7 @@ function process_message()
     msg.Payload = msg.Timestamp
   end
 
-  msg.Payload = msg.Symbol
+  msg.Payload = msg.result
   inject_message(msg)
   return 0
 end
