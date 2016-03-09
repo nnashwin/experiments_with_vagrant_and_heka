@@ -77,7 +77,7 @@ function process_message ()
     end
     fields.msg = nil
 
-    --msg.Fields = fields
+    msg.Fields = fields
     inject_message(msg)
     return 0
 end

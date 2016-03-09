@@ -9,7 +9,7 @@ decoder = "MultiDecoder"
 
 [MultiDecoder]
 type = "MultiDecoder"
-subs = ['RedisDecoder', 'HaproxyDecoder']
+subs = ['HaproxyDecoder', 'RedisDecoder']
 cascade_strategy = "first-wins"
 
 [HaproxyDecoder]
