@@ -1,11 +1,11 @@
 [hekad]
-base_dir = "/home/heka/"
+maxprocs = 2
+base_dir = "/home/heka"
 
-[LogFileInput]
-type = "LogstreamerInput"
+[LogstreamerInput]
 log_directory = "/vagrant/log"
 file_match = 'test\.log'
-decoder = "MultiDecoder"
+decoder = "HaproxyDecoder"
 
 [MultiDecoder]
 type = "MultiDecoder"
@@ -28,3 +28,10 @@ append_newlines = false
 message_matcher = "TRUE"
 encoder = "PayloadEncoder"
 
+[FileOutput]
+message_matcher = "TRUE"
+path = "/vagrant/log/heka_output.log"
+perm = "666"
+flush_count = 100
+flush_operator = "OR"
+encoder = "PayloadEncoder"

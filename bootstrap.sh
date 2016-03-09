@@ -32,18 +32,12 @@ echo 'export GOROOT=$HOME/go' >> ~/.bash_profile
 
 echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.bash_profile
 
-# git clone exporter
-git clone https://github.com/docker-infra/heka_exporter.git $HOME/heka_exporter
-
-# go build the binary for the exporter
-go build .
-
 # download and untar heka
 
 sudo wget https://github.com/mozilla-services/heka/releases/download/v0.10.0/heka-0_10_0-linux-amd64.tar.gz
 sudo mkdir /usr/heka/ && sudo tar -xzf heka-0_10_0-linux-amd64.tar.gz -C /usr/heka/ --strip-components 1
 
-#download and untar redis
+#Download and untar redis
 
 sudo wget http://download.redis.io/releases/redis-3.0.7.tar.gz
 sudo mkdir /usr/redis && sudo tar -xzf redis-3.0.7.tar.gz -C /usr/redis/ --strip-components 1
