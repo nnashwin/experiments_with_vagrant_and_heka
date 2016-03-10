@@ -1,15 +1,16 @@
 [hekad]
 maxprocs = 2
-base_dir = "/home/heka"
+base_dir = "/vagrant/heka"
 
 [LogstreamerInput]
 log_directory = "/vagrant/log"
 file_match = 'test\.log'
-decoder = "HaproxyDecoder"
+decoder = "JsonDecoder"
 
 [MultiDecoder]
 type = "MultiDecoder"
-subs = ['HaproxyDecoder', 'RedisDecoder']
+subs = ['HaproxyDecoder', 'RethinkDbDecoder', 'RedisDecoder']
+log_sub_errors = false
 cascade_strategy = "first-wins"
 
 [HaproxyDecoder]
@@ -20,6 +21,16 @@ filename = "lua_decoders/haproxy_decoder.lua"
 type = "SandboxDecoder"
 filename = "lua_decoders/redis_decoder.lua"
 
+[RethinkDbDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/rethinkdb_decoder.lua"
+
+[JsonDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/json.lua"
+
+  [JsonDecoder.config]
+  map_fields = true
 
 [PayloadEncoder]
 append_newlines = false

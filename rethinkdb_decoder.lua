@@ -21,16 +21,17 @@ local msg = {
 
 function process_message()
   local log = read_message("Payload")
+
   local m = grammar:match(log)
+  if not m then return -1 end
   if m then
-    msg.Timestamp = m.timestamp
-    msg.msgText = m.msgtext
     msg.Type = m.msgtype
+    msg.Payload = m.msgtext
+    msg.Timestamp = m.timestamp
   else
     msg.Type = "Ignore"
   end
 
-  msg.Payload = msg.msgText
   inject_message(msg)
   return 0
 end

@@ -28,6 +28,7 @@ local msg = {
 function process_message()
   local log = read_message("Payload")
   local m = grammar:match(log)
+  if not m then return -1 end
   if m then
     msg.Timestamp = m.log_date
     msg.Symbol = m.symbol

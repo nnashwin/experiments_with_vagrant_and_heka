@@ -91,8 +91,9 @@ sudo mkdir /usr/heka/log/
 
 sudo cp /vagrant_data/heka-config.toml /etc/hekad.toml
 
-sudo cp /vagrant/haproxy_decoder.lua /usr/heka/share/heka/lua_decoders/haproxy_decoder.lua
-sudo cp /vagrant/redis_decoder.lua /usr/heka/share/heka/lua_decoders/redis_decoder.lua
+sudo cp /vagrant/haproxy_decoder.lua /usr/share/heka/lua_decoders/haproxy_decoder.lua
+sudo cp /vagrant/redis_decoder.lua /usr/share/heka/lua_decoders/redis_decoder.lua
+sudo cp /vagrant/rethinkdb_decoder.lua /usr/share/heka/lua_decoders/rethinkdb_decoder.lua
 
 sudo cp /usr/heka/share/heka/lua_decoders/* /usr/share/heka/lua_decoders/
 sudo cp /usr/heka/share/heka/lua_filters/* /usr/share/heka/lua_filters/
