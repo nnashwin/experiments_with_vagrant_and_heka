@@ -5,11 +5,11 @@ base_dir = "/vagrant/heka"
 [LogstreamerInput]
 log_directory = "/vagrant/log"
 file_match = 'test\.log'
-decoder = "JsonDecoder"
+decoder = "MultiDecoder"
 
 [MultiDecoder]
 type = "MultiDecoder"
-subs = ['HaproxyDecoder', 'RethinkDbDecoder', 'RedisDecoder']
+subs = ['HaproxyDecoder', 'RethinkDbDecoder', 'RedisDecoder', 'JsonDecoder']
 log_sub_errors = false
 cascade_strategy = "first-wins"
 
@@ -29,8 +29,6 @@ filename = "lua_decoders/rethinkdb_decoder.lua"
 type = "SandboxDecoder"
 filename = "lua_decoders/json.lua"
 
-  [JsonDecoder.config]
-  map_fields = true
 
 [PayloadEncoder]
 append_newlines = false
