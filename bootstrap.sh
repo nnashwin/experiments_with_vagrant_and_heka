@@ -67,46 +67,37 @@ sudo cp /vagrant_data/grafana_dashboards/* /usr/grafana/dashboard_json/
 
 # clone exporter repo into the file system
 
-# sudo mkdir /usr/heka_exporter
-# sudo git clone https://github.com/docker-infra/heka_exporter.git /usr/heka_exporter
+# echo 'export PATH=/usr/heka/bin:$PATH' >> ~/.bash_profile
+
+# sudo mkdir /usr/share/heka/
+# sudo mkdir /usr/share/heka/lua_decoders
+# sudo mkdir /usr/share/heka/lua_filters
+# sudo mkdir /usr/share/heka/lua_modules
+
+# sudo mkdir /var/log/syslog-ng
+
+# sudo mkdir /home/heka
+
+# # config heka
+
+# echo PATH $PATH
+
+# sudo mkdir /usr/heka/log/
 
 
-echo 'export PATH=/usr/heka/bin:$PATH' >> ~/.bash_profile
+# sudo cp /vagrant_data/heka-config.toml /etc/hekad.toml
 
-sudo mkdir /usr/share/heka/
-sudo mkdir /usr/share/heka/lua_decoders
-sudo mkdir /usr/share/heka/lua_filters
-sudo mkdir /usr/share/heka/lua_modules
+# sudo cp /vagrant/haproxy_decoder.lua /usr/share/heka/lua_decoders/haproxy_decoder.lua
+# sudo cp /vagrant/redis_decoder.lua /usr/share/heka/lua_decoders/redis_decoder.lua
+# sudo cp /vagrant/rethinkdb_decoder.lua /usr/share/heka/lua_decoders/rethinkdb_decoder.lua
 
-sudo mkdir /var/log/syslog-ng
-
-sudo mkdir /home/heka
-
-# config heka
-
-echo PATH $PATH
-
-sudo mkdir /usr/heka/log/
-
-
-sudo cp /vagrant_data/heka-config.toml /etc/hekad.toml
-
-sudo cp /vagrant/haproxy_decoder.lua /usr/share/heka/lua_decoders/haproxy_decoder.lua
-sudo cp /vagrant/redis_decoder.lua /usr/share/heka/lua_decoders/redis_decoder.lua
-sudo cp /vagrant/rethinkdb_decoder.lua /usr/share/heka/lua_decoders/rethinkdb_decoder.lua
-
-sudo cp /usr/heka/share/heka/lua_decoders/* /usr/share/heka/lua_decoders/
-sudo cp /usr/heka/share/heka/lua_filters/* /usr/share/heka/lua_filters/
-sudo cp /usr/heka/share/heka/lua_modules/* /usr/share/heka/lua_modules/
+# sudo cp /usr/heka/share/heka/lua_decoders/* /usr/share/heka/lua_decoders/
+# sudo cp /usr/heka/share/heka/lua_filters/* /usr/share/heka/lua_filters/
+# sudo cp /usr/heka/share/heka/lua_modules/* /usr/share/heka/lua_modules/
 
 # config heka dashboard to send to prometheus
 # sudo mkdir /usr/share/heka/dasher
 
-# create dir for and clone comp stats exporter
-sudo mkdir /usr/node_exporter
-sudo git clone https://github.com/prometheus/node_exporter.git /usr/node_exporter
-cd /usr/node_exporter
-sudo make
 
 sudo chmod 755 /home
 sudo chmod 777 /home/heka
@@ -127,7 +118,7 @@ sudo systemctl enable /vagrant_data/prometheus.service
 
 #start systemctl services
 sudo systemctl start syslog-ng.service
-sudo systemctl start heka.service
+#sudo systemctl start heka.service
 sudo systemctl start prometheus.service
 sudo systemctl start node-exporter.service
 sudo systemctl start grafana.service
