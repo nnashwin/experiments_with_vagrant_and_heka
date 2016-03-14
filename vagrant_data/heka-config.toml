@@ -37,6 +37,14 @@ append_newlines = false
 message_matcher = "TRUE"
 encoder = "PayloadEncoder"
 
+[localServer]
+type = "HttpOutput"
+message_matcher = "TRUE"
+address = "http://127.0.0.1:4000"
+encoder = "PayloadEncoder"
+[localServer.headers]
+Content-Type = ["application/json"]
+
 [FileOutput]
 message_matcher = "TRUE"
 path = "/vagrant/log/heka_output.log"

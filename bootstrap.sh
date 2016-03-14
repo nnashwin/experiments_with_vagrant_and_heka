@@ -67,37 +67,33 @@ sudo cp /vagrant_data/grafana_dashboards/* /usr/grafana/dashboard_json/
 
 # clone exporter repo into the file system
 
-# echo 'export PATH=/usr/heka/bin:$PATH' >> ~/.bash_profile
+echo 'export PATH=/usr/heka/bin:$PATH' >> ~/.bash_profile
 
-# sudo mkdir /usr/share/heka/
-# sudo mkdir /usr/share/heka/lua_decoders
-# sudo mkdir /usr/share/heka/lua_filters
-# sudo mkdir /usr/share/heka/lua_modules
+sudo mkdir /usr/share/heka/
+sudo mkdir /usr/share/heka/lua_decoders
+sudo mkdir /usr/share/heka/lua_filters
+sudo mkdir /usr/share/heka/lua_modules
 
-# sudo mkdir /var/log/syslog-ng
+sudo mkdir /var/log/syslog-ng
 
-# sudo mkdir /home/heka
+sudo mkdir /home/heka
 
-# # config heka
+# config heka
 
 # echo PATH $PATH
 
-# sudo mkdir /usr/heka/log/
+sudo mkdir /usr/heka/log/
 
 
-# sudo cp /vagrant_data/heka-config.toml /etc/hekad.toml
+sudo cp /vagrant_data/heka-config.toml /etc/hekad.toml
 
-# sudo cp /vagrant/haproxy_decoder.lua /usr/share/heka/lua_decoders/haproxy_decoder.lua
-# sudo cp /vagrant/redis_decoder.lua /usr/share/heka/lua_decoders/redis_decoder.lua
-# sudo cp /vagrant/rethinkdb_decoder.lua /usr/share/heka/lua_decoders/rethinkdb_decoder.lua
+sudo cp /vagrant/haproxy_decoder.lua /usr/share/heka/lua_decoders/haproxy_decoder.lua
+sudo cp /vagrant/redis_decoder.lua /usr/share/heka/lua_decoders/redis_decoder.lua
+sudo cp /vagrant/rethinkdb_decoder.lua /usr/share/heka/lua_decoders/rethinkdb_decoder.lua
+sudo cp /vagrant/json.lua /usr/share/heka/lua_decoders/json.lua
 
-# sudo cp /usr/heka/share/heka/lua_decoders/* /usr/share/heka/lua_decoders/
-# sudo cp /usr/heka/share/heka/lua_filters/* /usr/share/heka/lua_filters/
-# sudo cp /usr/heka/share/heka/lua_modules/* /usr/share/heka/lua_modules/
-
-# config heka dashboard to send to prometheus
-# sudo mkdir /usr/share/heka/dasher
-
+sudo cp /usr/heka/share/heka/lua_filters/* /usr/share/heka/lua_filters/
+sudo cp /usr/heka/share/heka/lua_modules/* /usr/share/heka/lua_modules/
 
 sudo chmod 755 /home
 sudo chmod 777 /home/heka
